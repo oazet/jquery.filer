@@ -29,6 +29,8 @@ __PHP:__
 
 Usage
 -------
+__Javascript:__
+
 Include the jQuery libraray and jquery.filer script file in your html page.
 ~~~~ html
 <script src="//code.jquery.com/jquery-latest.min.js"></script>
@@ -78,8 +80,10 @@ $('input:file').filer({
 });
 ~~~~
 
+__PHP:__
 ~~~~ php
-include('upload.class.php');
+<?php
+    include('upload.class.php');
         
     $upload = new uploadClass();
     
@@ -90,8 +94,8 @@ include('upload.class.php');
                                 'limit'=>3,
                                 'maxSize'=>3,
                                 'title'=>array('auto',12),
-                                'uploadDir'=>"uploads/",
-                                'types'=>"Image, Audio, Video",
+                                'uploadDir'=>'uploads/',
+                                'types'=>'Image, Audio, Video',
                                 'extensions'=>array("jpg","jpeg","png","gif","mp3","wmv","mp4"),
                                 'removeFiles'=>true,
                                 'required'=>true,
@@ -109,6 +113,7 @@ include('upload.class.php');
         echo 'Error';
         print_r($upload->data);
     }
+?>
 ~~~~
 
 Version
