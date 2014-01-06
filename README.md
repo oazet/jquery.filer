@@ -1,29 +1,8 @@
 #jquery.filer
 jQuery.Filer - HTML5 File Uploader, a plugin tool for Jquery wich change completely File Input and make it with multiple file selection, drag&drop support, different validations, thumbnails, instant upload, progress bars and other options for your jQuery. It also includes simple PHP uploading script with validation and other options for your upload.
 
-#Example
-$("input:file").filer();
+#<a href="http://creativedream.net/jquery.filer/">Demo</a>
 
-<b>Features jQuery:</b>
-
-Completely change File Input
-Upload files after choosing
-Validate files(limit,size,extension,image)
-Create thumbs
-Custom thumbs icons(psd included) for all type of files
-Custom templates for: new Input and thumbs
-Remove Choosed/Uploaded Files
-Drag & Drop Option (it will return a FormData)
-Features PHP:
-
-<b>Simple PHP usage</b>
-Uploading files via global variable: $_FILES
-Multiple and single files Uploading
-Simple options to customize
-Custom title for uploaded files
-Validate files(limit,size,extension,required)
-Remove Files
-Special returning data after upload
 
 #License
 
