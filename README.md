@@ -35,8 +35,21 @@ $('input:file').filer({
     maxChar    : 15,
     removeFiles: true,
     template   : '<img src="%image-url%" title="%original-name%" /><em>%title%</em> %remove-icon%',
-    uploadFile : null,
-    dragDrop   : null,
+    uploadFile: {
+        url:         'uploadEachFile.php',
+        data:        {},
+        beforeSend:  function(parent){parent.append('<div class="progress-bar" />');},
+        success:     function(data, parent, progress){ },
+        error:       function(e, parent, progress){ },
+        progressEnd: function(progress){progress.addClass('done-erase');},
+        onUploaded:  function(parent){ }
+    },
+    dragDrop: {
+        dropBox:  '.dragDropBox',
+        dragOver: function(e, parent){ $('.dragDropBox').addClass('hover'); },
+        dragOut:  function(e, parent){ $('.dragDropBox').removeClass('hover'); },
+        drop:     function(e, formData, parent){ $('.dragDropBox').removeClass('hover'); },
+    },
     beforeShow : function(e,parent){ return true; },
     onEmpty    : function(parent, appendBox){ }
     onSelect   : function(e,parent,appendBox){ },
