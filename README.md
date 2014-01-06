@@ -11,14 +11,11 @@ Include the jQuery libraray file and jquery.filer script in your html page.
 <script src="//code.jquery.com/jquery-latest.min.js"></script>
 <script src="jquery.filer.min.js"></script>
 ~~~~
-
 Create a file input.
 ~~~~ html
 <input type="file" name="file" multiple="multiple" />
 ~~~~
-
 The plugin is named "filer" and can be applied to a file input. You will probably also specify some options while applying the plugin.
-
 ~~~~ javascript
 $("input:file").filer();
 
@@ -57,7 +54,6 @@ $('input:file').filer({
     inputText  : {choose:'Choose',feedback:'Choose files',feedback2:'files were chosen',feedback3:'No file chosen'}
 });
 ~~~~
-
 
 #License
 
