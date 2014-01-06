@@ -38,17 +38,17 @@ $('input:file').filer({
     uploadFile: {
         url:         'uploadEachFile.php',
         data:        {},
-        beforeSend:  function(parent){parent.append('<div class="progress-bar" />');},
+        beforeSend:  function(parent){ parent.append('<div class="progress-bar" />'); },
         success:     function(data, parent, progress){ },
         error:       function(e, parent, progress){ },
-        progressEnd: function(progress){progress.addClass('done-erase');},
+        progressEnd: function(progress){ progress.addClass('done-erase'); },
         onUploaded:  function(parent){ }
     },
     dragDrop: {
         dropBox:  '.dragDropBox',
-        dragOver: function(e, parent){ $('.dragDropBox').addClass('hover'); },
-        dragOut:  function(e, parent){ $('.dragDropBox').removeClass('hover'); },
-        drop:     function(e, formData, parent){ $('.dragDropBox').removeClass('hover'); },
+        dragOver: function(e, parent){ },
+        dragOut:  function(e, parent){ },
+        drop:     function(e, formData, parent){ },
     },
     beforeShow : function(e,parent){ return true; },
     onEmpty    : function(parent, appendBox){ }
