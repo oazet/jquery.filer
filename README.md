@@ -33,7 +33,7 @@ __Javascript:__
 
 Include the jQuery libraray and jquery.filer script file in your html page.
 ~~~~ html
-<script src="//code.jquery.com/jquery-latest.min.js"></script>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="jquery.filer.min.js"></script>
 ~~~~
 Create a file input.
