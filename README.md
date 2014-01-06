@@ -3,9 +3,8 @@ jquery.Filer - Simple HTML5 File Uploader, a plugin tool for Jquery wich change 
 
 <b><a href="http://creativedream.net/jquery.filer/#demos" target="blank">Demo</a></b> | <b><a href="http://creativedream.net/jquery.filer/#documentation" target="blank">Documentation</a></b>
 
-#Features:
-
-__Javascript:__
+Features
+-------
 *Completely change File Input
 *Upload files after choosing
 *Validate files(limit,size,extension,image)
@@ -15,7 +14,6 @@ __Javascript:__
 *Remove Choosed/Uploaded Files
 *Drag & Drop Option (it will return a FormData)
 
-__PHP:__
 *Simple PHP usage
 *Uploading files via global variable: $_FILES
 *Multiple and single files Uploading
