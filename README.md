@@ -28,8 +28,7 @@ __PHP:__
 
 Usage
 -------
-
-Include the jQuery libraray file and jquery.filer script in your html page.
+Include the jQuery libraray and jquery.filer script file in your html page.
 ~~~~ html
 <script src="//code.jquery.com/jquery-latest.min.js"></script>
 <script src="jquery.filer.min.js"></script>
@@ -77,6 +76,10 @@ $('input:file').filer({
     inputText  : {choose:'Choose',feedback:'Choose files',feedback2:'files were chosen',feedback3:'No file chosen'}
 });
 ~~~~
+
+Version
+-------
+1.0
 
 License
 -------
