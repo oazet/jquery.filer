@@ -1,4 +1,5 @@
-#jquery.filer
+jquery.filer
+-------
 jquery.Filer - Simple HTML5 File Uploader, a plugin tool for Jquery wich change completely File Input and make it with multiple file selection, drag&drop support, different validations, thumbnails, instant upload, progress bars and other options for your jQuery. It also includes simple PHP uploading script with validation and other options for your upload.
 
 <b><a href="http://creativedream.net/jquery.filer/#demos" target="blank">Demo</a></b> | <b><a href="http://creativedream.net/jquery.filer/#documentation" target="blank">Documentation</a></b>
@@ -75,6 +76,39 @@ $('input:file').filer({
     onRemove   : function(e,parent){ return true; },
     inputText  : {choose:'Choose',feedback:'Choose files',feedback2:'files were chosen',feedback3:'No file chosen'}
 });
+~~~~
+
+~~~~ php
+include('upload.class.php');
+        
+    $upload = new uploadClass();
+    
+    $upload->fields = 'name,extension,type,size,tmpName,uploadDir,newFile,replaced,date,perms,image';
+    
+    $obj = $upload->upload($file = 'file3',  
+                           $options = array(
+                                'limit'=>3,
+                                'maxSize'=>3,
+                                'title'=>array('auto',12),
+                                'uploadDir'=>"uploads/",
+                                'types'=>"Image, Audio, Video",
+                                'extensions'=>array("jpg","jpeg","png","gif","mp3","wmv","mp4"),
+                                'removeFiles'=>true,
+                                'required'=>true,
+                                'onCheck'=>'name of your callback function',
+                                'onUpload'=>'name of your callback function',
+                               )
+                            );
+    
+    $status = $upload->status;
+    
+    if($status == true){
+        echo 'Success';
+        print_r($upload->data);
+    }else{
+        echo 'Error';
+        print_r($upload->data);
+    }
 ~~~~
 
 Version
