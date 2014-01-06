@@ -1,0 +1,178 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>jQuery Filer 1.0 | Creativedream</title>
+    
+    <!--Stylesheets-->
+    <link href="css/jquery.filer.css" type="text/css" rel="stylesheet" />
+    
+    <!--jQuery-->
+    <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" src="js/jquery.filer.min.js"></script>
+    <script type="text/javascript">
+	$(document).ready(function(e) {
+		//Basic Options
+		$('input[name="file[]"]').filer();
+		
+		//Custom Options
+		$('input[name="file2[]"]').filer({
+			types      : 'Image, Audio, Video', //Type of file that are allowed, just for alert
+			limit      : 10, //Max files can be uploaded, can be null.
+			maxSize    : 50, //Max File Size in MB's, can be null.
+			extensions : ['jpg','jpeg','png','gif','mp3','mp4','wmv'], //Type of files ('jpg','jpeg','png','mp3','wmv','zip','psd'...), can be null.
+			newExt     : ['zip','psd'], //Allows you to create thumbs for this type of file with the same image title *.png.
+			changeInput: true, //Change Input? : boolean, string
+			showThumbs : true, //Create thumbs after choosing files?
+			iconPath   : './images/', //Path to icons.
+			appendTo   : null, //Append Thumbs div to..., if null then will append after input
+			maxChar    : 15, //Title char limit
+			removeFiles: true, //Can I Remove Files?
+			template   : '<img src="%image-url%" title="%original-name%" /><em>%title%</em> %remove-icon%', //Template: %title%, %original-name%, %type%, %size%, %extension%, %image-url%, %index%, %remove-icon%
+			uploadFile : null, //Upload each file after choose?
+			dragDrop   : null, //Enable drag and drop to input.
+			beforeShow : function(e,parent){ console.log('before function'); return true; }, //Before show thumbs, must return true;
+			onSelect   : function(e,parent,appendBox){ console.log('onSelect function');  }, //On Select function
+			onRemove   : function(e,parent){ console.log('onRemove function');  return true; }, //on Remove element, must return true
+			inputText  : {choose:'Choose',feedback:'Choose files',feedback2:'files were chosen',feedback3:'No file chosen'}
+		});
+		
+		var rData = '';
+		
+		//Options+
+		$('input[name="file3[]"]').filer({
+			changeInput: '<div class="dragDropBox"><span class="message">Click or Drop files here to upload.</span></div>',
+			appendTo   : '.dragDropBox',
+			template   : '<img src="%image-url%" title="%original-name%" /><em>%title%</em>',
+			uploadFile: {
+				url:         'uploadEachFile.php', //url to upload each file
+				data:        {}, //ajax data
+				beforeSend:  function(parent){parent.append('<div class="progress-bar" />');}, //ajax berfore send
+				success:     function(data, parent, progress){ rData += data; }, //ajax success
+				error:       function(e, parent, progress){ }, //ajax error
+				progressEnd: function(progress){progress.addClass('done-erase');}, //ajax progress end
+				onUploaded:  function(parent){ alert(rData); } //when all files were uplaoded
+			},
+			dragDrop: {
+				dropBox:  '.dragDropBox', //Drop box, can be null
+				dragOver: function(e, parent){ $('.dragDropBox').addClass('hover'); }, //Drag function
+				dragOut:  function(e, parent){ $('.dragDropBox').removeClass('hover'); }, //DragOut function
+				drop:     function(e, formData, parent){ $('.dragDropBox').removeClass('hover'); }, //Drop function
+			},
+			onEmpty    : function(parent, appendBox){ $(appendBox).removeClass('done'); },
+			onSelect   : function(e,parent,appendBox){ $(appendBox).addClass('done'); }, //On Select function
+		});
+		
+	});
+    </script>
+    <style>
+	.dragDropBox{
+		position:relative;
+		display:block;
+		min-height: 200px; 
+		width:500px; 
+		background-color:#f3f3f3;
+		border:2px dashed #aaa;
+	}
+	.dragDropBox span.message{
+		color:#333;
+		font-family:sans-serif;
+		position:absolute;
+		left:50%;
+		margin-left:-105px;
+		top:45%;
+	}
+	.dragDropBox:not(.done):hover, .dragDropBox.hover{
+		opacity: 0.7;
+		filter: alpha(opacity=70);
+		cursor:pointer;
+	}
+	</style>
+    
+    <!--[if IE]>
+          <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <h1>jQuery Filer 1.0</h1>
+    <p>jQuery.Filer is a plugin tool for Jquery wich change completely <b>File Input</b> and make it with multiple file selection, drag&drop support, different validations, thumbnails, instant upload, progress bars and other options for your jQuery. It also includes simple <b>PHP uploading script</b> with validation and other options for your upload.</p>
+    <hr />
+    <h3>Demo:</h3>
+    
+    <!-- FORM && Input -->
+    <div>
+       <form action="upload.php" method="post" enctype="multipart/form-data">
+       
+         <p>&rarr; Basic Options:</p>
+         <input type="file" name="file[]" multiple="multiple" />
+         
+         <p>&rarr; Custom Options:</p>
+         <input type="file" name="file2[]" multiple="multiple" />
+         
+         <input type="submit" name="submit" />
+       </form> 
+       
+       <br />
+       <hr />
+       
+       <p>&rarr; Options+ (Drag&Drop and Upload each file after choosing):</p>
+       <input type="file" name="file3[]" multiple="multiple" />
+    </div>
+    
+    <br />
+    <hr />
+    <h4>Options:</h4>
+    <pre>
+    $('input:file').filer({
+        types      : 'Image, Audio, Video', <b style="color:#aaa">//Type of file that are allowed, just for alert</b>
+        limit      : 10, <b style="color:#aaa">//Max files can be uploaded.</b>
+        maxSize    : 50, <b style="color:#aaa">//Max File Size in MB's.</b>
+        extensions : ['jpg','jpeg','png','gif','mp3','mp4','wmv'], <b style="color:#aaa">//Type of files ('jpg','jpeg','png','mp3','wmv','zip','psd'...).</b>
+        newExt     : ['zip'], <b style="color:#aaa">//Allows you to create thumbs for this type of file with the same image title *.png.</b>
+        showThumbs : true, <b style="color:#aaa">//Create thumbs after choosing files?</b>
+        iconPath   : './images/', <b style="color:#aaa">//Path to icons.</b>
+        removeFiles: true, <b style="color:#aaa">//Can I Remove Files?</b>
+        appendTo   : null, <b style="color:#aaa">//Append Thumbs div to..., if null then will append after input</b>
+        changeInput: true, <b style="color:#aaa">//Change Input?</b>
+        maxChar    : 15, <b style="color:#aaa">//Title char limit</b>
+        required   : true, <b style="color:#aaa">//Files are required?</b>
+        uploadFile : { <b style="color:#aaa">//Upload each file after choose</b>
+            url        : 'uploadEachFile.php', <b style="color:#aaa">//url to upload each file</b>
+            data       : {}, <b style="color:#aaa">//ajax data</b>
+            beforeSend : function(parent){parent.append('&lt;div class="progress-bar" />');}, <b style="color:#aaa">//ajax berfore send</b>
+            success    : function(data, parent, progress){ }, <b style="color:#aaa">//ajax success</b>
+            error      : function(e){ }, <b style="color:#aaa">//ajax error</b>
+            progressEnd: function(progress){progress.addClass('done-erase');} <b style="color:#aaa">//ajax progress end</b>
+            onUploaded : function(parent){ } <b style="color:#aaa">//when all files were uplaoded</b> 
+        },
+        dragDrop: { <b style="color:#aaa">//Enable drag&drop option</b>
+            dropBox  : 'body', <b style="color:#aaa">//DropBox, if null, drag will be enabled for input</b>
+            dragOver : function(e, parent){ parent.addClass('drag'); }, <b style="color:#aaa">//Drag function</b>
+            dragOut  : function(e, parent){ parent.removeClass('drag'); }, <b style="color:#aaa">//DragOut function</b>
+            drop     : function(e, formData, parent){ parent.removeClass('drag'); }, <b style="color:#aaa">//Drop function</b>
+        },
+        template   : '&lt;img src="%image-url%" title="%original-name%" />&lt;em>%title%&lt;/em> %remove-icon%', <b style="color:#aaa">//Template: %title%, %original-name%, %type%, %size%, %extension%, %image-url%, %index%, %remove-icon%</b>
+        beforeShow : function(e,parent){return true;}, <b style="color:#aaa">//Before show thumbs, must return true;</b>
+        onSelect   : function(e,parent,appendBox){ }, <b style="color:#aaa">//On select function</b>
+        onRemove   : function(e){ return true; }, <b style="color:#aaa">//On remove element, must return true</b>
+        inputText  : {choose:'Choose',feedback:'Choose files',feedback2:'files were chosen',feedback3:'No file chosen'} <b style="color:#aaa">//Input text</b>
+    });
+    </pre>
+    <h4>This script is including:</h4>
+    <ul>
+      <li>Jquery Code - <i>jquery.filer.js</i></li>
+      <li>CSS Code - <i>jquery.filer.css</i></li>
+      <li>Icons with *.psd - <i>/images/</i></li>
+      <li>PHP Code - <i>upload.class.php</i>, <i>upload.php</i>, <i>uploadEachFile.php</i></li>
+      <li>Documentation - <i>documentation.html</i></li>
+    </ul> 
+    <h4>This script Requires:</h4>
+    <ul>
+      <li>Jquery library - <i>jquery-1.8.2.min.js</i></li>
+      <li>Server wich runs PHP</li>
+    </ul>
+    <br />
+    &copy; 2013 <b>Creativedream.net</b>.
+</body>
+</html>
